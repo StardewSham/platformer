@@ -197,6 +197,43 @@ public class Level {
 	//Your code goes here! 
 	//Please make sure you read the rubric/directions carefully and implement the solution recursively!
 	private void water(int col, int row, Map map, int fullness) {
+		  //make water (You’ll need modify this to make different kinds of water such as half water and quarter water)
+		Water w = new Water (col, row, tileSize, tileset.getImage("Full_water"), this, fullness);
+		map.addTile(col, row, w);
+
+                       //check if we can go down
+					   //0 for index in map.getTiles is a placeholder because it was supposed to be col but idk if it'll break
+					   if(row + 1 <map.getTiles()[0].length && !(map.getTiles()[col][row+1] instanceof Water) && !map.getTiles()[col][row+1].isSolid()){
+
+						water(col,row+1,map,0);
+					   }
+
+					   else if(fullness == 0 && col + 1 < (map.getTiles().length) && !(map.getTiles()[col-1][row] instanceof Water) && (!map.getTiles()[col+1][row].isSolid())){
+						water(col + 1, row, map, 2);
+						if(fullness == 0 && col - 1 >= 0 && !(map.getTiles()[col-1][row] instanceof Water) && (!map.getTiles()[col+1][row].isSolid())){
+							water(col - 1, row, map, 2);
+						}
+					   }
+					   
+						//same stuff but different way with col
+
+						//placeholder placeholder i dont wanna do this rn
+						//supposed to be like col -1 <=0 and col+1>gettiles or something like that, and then [col+1][row] etc etc
+						// ughhhhhhh i gotta do this todayyyyy
+						//cmon need the b need the b
+						//delete this later
+					   
+
+                       //if we can’t go down go left and right.
+		//right
+		else if(col+1 < map.getTiles().length && !(map.getTiles()[col+1][row] instanceof Water)) {
+			water(col+1, row, map, 3);
+		}
+		//left
+		else if(col-1 >= 0 && !(map.getTiles()[col-1][row] instanceof Water)) {
+			water(col-1, row, map, 3);
+		}
+
 		
 	}
 
