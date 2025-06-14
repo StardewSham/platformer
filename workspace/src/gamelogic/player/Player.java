@@ -15,6 +15,20 @@ public class Player extends PhysicsObject{
 	public float jumpPower = 1350;
 
 	private boolean isJumping = false;
+	public boolean coinBool = false;
+	public boolean playerBet;
+	public int countifwin;
+	public int coin = (int)(Math.random()*2);{
+	if(coin==1){
+		coinBool=true;
+		
+	
+	}
+	else{
+		coinBool=false;
+	}
+
+}
 
 	public Player(float x, float y, Level level) {
 	
@@ -26,7 +40,17 @@ public class Player extends PhysicsObject{
 	@Override
 	public void update(float tslf) {
 		super.update(tslf);
+		if(PlayerInput.isTailsDown()){
+			playerBet = false;
+			if(playerBet!=coinBool){
+				countifwin=-1;
+			}
+			if(playerBet==coinBool){
+				countifwin=1;
 		
+			}
+
+		}
 		movementVector.x = 0;
 		if(PlayerInput.isLeftKeyDown()) {
 			movementVector.x = -walkSpeed;
@@ -38,7 +62,7 @@ public class Player extends PhysicsObject{
 			movementVector.y = -jumpPower;
 			isJumping = true;
 		}
-		
+		//need to add the heads and tails here pretty sure?
 		isJumping = true;
 		if(collisionMatrix[BOT] != null) isJumping = false;
 	}
@@ -47,7 +71,7 @@ public class Player extends PhysicsObject{
 	public void draw(Graphics g) {
 		g.setColor(Color.YELLOW);
 		MyGraphics.fillRectWithOutline(g, (int)getX(), (int)getY(), width, height);
-		
+
 		if(Main.DEBUGGING) {
 			for (int i = 0; i < closestMatrix.length; i++) {
 				Tile t = closestMatrix[i];

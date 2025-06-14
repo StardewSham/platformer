@@ -7,7 +7,8 @@ import gameengine.GameObject;
 import gameengine.hitbox.RectHitbox;
 import gameengine.maths.Vector2D;
 import gamelogic.level.Level;
-
+//put this somwwhere
+//public void setImage(BufferedImage img){image = img;}
 public class Tile{
 
 	protected Vector2D position;
@@ -24,7 +25,9 @@ public class Tile{
 		this.solid = solid;
 		this.level = level;
 	}
-	
+	public void setImage(BufferedImage img){
+		image = img;
+	}
 	public void update (float tslf) {};
 	
 	public void draw (Graphics g) {
